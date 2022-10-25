@@ -1,0 +1,20 @@
+version: '3.2'
+services:
+  php:
+    image: php:8.0-fpm
+
+    volumes:
+      - type: volume
+        source: nfsmount-repo
+        target: /var/www/app
+
+        volume:
+          nocopy: true
+
+volumes:
+  nfsmount-repo:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: "addr=host.docker.internal,hard,nolock,rw"
+      device: ":/Users/karl/Sites/nfs-test"
